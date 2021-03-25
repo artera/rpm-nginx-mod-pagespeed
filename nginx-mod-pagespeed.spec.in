@@ -1,7 +1,7 @@
 Summary: PageSpeed module for nginx
 Name: nginx-mod-pagespeed
 Version: 1.13.35.2
-Release: 3%{?dist}
+Release: 1%{?dist}
 Vendor: Artera
 URL: https://www.ngxpagespeed.com/
 
@@ -50,7 +50,7 @@ sed -r 's@^pagespeed_libs="(\$psol_binary.*)"@pagespeed_libs="\1 -Wl,-z,noexecst
 
 %build
 cd %{_builddir}/nginx-%{_nginxver}
-./configure %(nginx -V 2>&1 | grep 'configure arguments' | sed -r 's@^[^:]+: @@') --add-dynamic-module=../incubator-pagespeed-ngx-%{_pagespeedver} || {
+./configure --with-file-aio --with-ipv6 --with-stream %(nginx -V 2>&1 | grep -Po -- '--with-http[^ ]+' | xargs echo) --with-cc-opt='%{optflags}' --add-dynamic-module=../incubator-pagespeed-ngx-%{_pagespeedver} || {
     cat %{nginx_build_dir}/objs/autoconf.err
     exit 1
 }
