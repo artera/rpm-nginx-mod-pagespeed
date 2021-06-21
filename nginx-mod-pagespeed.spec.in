@@ -1,7 +1,7 @@
 Summary: PageSpeed module for nginx
 Name: nginx-mod-pagespeed
 Version: 1.13.35.2
-Release: 3%{?dist}
+Release: 4%{?dist}
 Vendor: Artera
 URL: https://www.ngxpagespeed.com/
 
